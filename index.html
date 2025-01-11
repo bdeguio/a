@@ -8,13 +8,22 @@
 </head>
 <body>
   <h1>ePub Reader</h1>
-  <div id="upload-section">
-    <input type="file" id="fileInput" accept=".epub" />
-    <button id="loadEpub">Load ePub</button>
+  <div id="authors">
+    <div class="author">
+      <h2>Author 1</h2>
+      <a href="reader.html?book=epubs/author1-book1.epub">Book 1</a>
+      <a href="reader.html?book=epubs/author1-book2.epub">Book 2</a>
+    </div>
+    <div class="author">
+      <h2>Author 2</h2>
+      <a href="reader.html?book=epubs/author2-book1.epub">Book 1</a>
+      <a href="reader.html?book=epubs/author2-book2.epub">Book 2</a>
+    </div>
+    <div class="author">
+      <h2>Author 3</h2>
+      <a href="reader.html?book=epubs/author3-book1.epub">Book 1</a>
+      <a href="reader.html?book=epubs/author3-book2.epub">Book 2</a>
+    </div>
   </div>
-  <div id="reader"></div>
-
-  <script src="https://unpkg.com/epubjs/dist/epub.min.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>
