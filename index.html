@@ -3,11 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Black Webpage</title>
+  <title>ePub Reader</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Welcome to My Black Webpage</h1>
-  <p>"The greatest obstacle to living is expectancy, which hangs upon tomorrow and loses today. You are arranging what lies in Fortune’s control and abandoning what lies in yours" -Seneca</p>
+  <h1>ePub Reader</h1>
+  <div id="upload-section">
+    <input type="file" id="fileInput" accept=".epub" />
+    <button id="loadEpub">Load ePub</button>
+  </div>
+  <div id="reader"></div>
+
+  <script src="https://unpkg.com/epubjs/dist/epub.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
