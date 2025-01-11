@@ -1,17 +1,18 @@
-document.getElementById("loadEpub").addEventListener("click", () => {
-  const fileInput = document.getElementById("fileInput").files[0];
-  if (fileInput) {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const epub = ePub(event.target.result);
-      const rendition = epub.renderTo("reader", {
-        width: "100%",
-        height: "600px",
-      });
-      rendition.display();
-    };
-    reader.readAsArrayBuffer(fileInput);
-  } else {
-    alert("Please upload an ePub file!");
+// Check if we are on the reader page
+if (window.location.pathname.includes("reader.html")) {
+  const queryParams = new URLSearchParams(window.location.search);
+  const bookPath = queryParams.get("book");
+
+  if (bookPath) {
+    const epub = ePub(bookPath);
+    const rendition = epub.renderTo("reader", {
+      width: "100%",
+      height: "100%",
+    });
+    rendition.display();
   }
-});
+
+  document.getElementById("backButton").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+}
