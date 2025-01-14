@@ -4,14 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ePub Reader</title>
-  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    #viewer {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
 </head>
 <body>
-  <h1>ePub Reader</h1>
-  <div id="links">
-    <a href="reader.html?book=epubs/2023ltr.epub">BRK 2023</a>
-    <a href="reader.html?book=epubs/2023luv.epub">LUV 2023</a>
-    <a href="reader.html?book=epubs/steinbeck-of-mice-and-men.epub">M&M STEIN</a>
-  </div>
+  <div id="viewer"></div>
+  <script>
+    // Load the ePub file from the relative path
+    const book = ePub("epubs/23BRK.epub");
+    
+    // Render the ePub into the viewer div
+    const rendition = book.renderTo("viewer", {
+      width: "100%",
+      height: "100%",
+    });
+
+    // Display the first page
+    rendition.display();
+
+    // Handle navigation (optional)
+    book.getMetadata().then(metadata => {
+      console.log("Loaded Book:", metadata.title, metadata.author);
+    });
+  </script>
 </body>
 </html>
