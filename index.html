@@ -4,25 +4,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ePub Reader</title>
+  <!-- Include epub.js -->
   <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
   <style>
     body {
       margin: 0;
       overflow: hidden;
+      font-family: Arial, sans-serif;
     }
     #viewer {
       width: 100vw;
       height: 100vh;
     }
+    #controls {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      z-index: 1000;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      margin: 0 5px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
   </style>
 </head>
 <body>
+  <!-- Controls for navigation -->
+  <div id="controls">
+    <button id="prev">Previous</button>
+    <div id="currentLocation">Page 1</div>
+    <button id="next">Next</button>
+  </div>
+  
+  <!-- Viewer for the ePub -->
   <div id="viewer"></div>
+
   <script>
-    // Load the ePub file from the relative path
-    const book = ePub("epubs/23BRK.epub");
-    
-    // Render the ePub into the viewer div
+    // Path to the ePub file
+    const bookPath = "https://raw.githubusercontent.com/bdeguio/black-webpage/main/epubs/23BRK.epub";
+
+    // Initialize the book
+    const book = ePub(bookPath);
+
+    // Render the book in the viewer
     const rendition = book.renderTo("viewer", {
       width: "100%",
       height: "100%",
@@ -31,9 +70,22 @@
     // Display the first page
     rendition.display();
 
-    // Handle navigation (optional)
-    book.getMetadata().then(metadata => {
-      console.log("Loaded Book:", metadata.title, metadata.author);
+    // Navigation controls
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
+    const currentLocation = document.getElementById("currentLocation");
+
+    prevButton.addEventListener("click", () => {
+      rendition.prev();
+    });
+
+    nextButton.addEventListener("click", () => {
+      rendition.next();
+    });
+
+    // Update the current location display
+    book.on("renderer:locationChanged", (location) => {
+      currentLocation.textContent = `Page ${location.start.index}`;
     });
   </script>
 </body>
