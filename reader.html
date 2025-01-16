@@ -10,13 +10,39 @@
   <div id="header">
     <a href="index.html" class="back-arrow">← Back</a>
   </div>
-  <div id="pdf-container">
-    <iframe 
-      src="https://raw.githubusercontent.com/bdeguio/black-webpage/main/epubs/23BRK.pdf" 
-      frameborder="0" 
-      width="100%" 
-      height="100%">
-    </iframe>
-  </div>
+  <canvas id="pdf-render"></canvas>
+  <script type="module">
+    import pdfjsLib from './pdfjs/pdf.mjs';
+
+    // Specify the worker source
+    pdfjsLib.GlobalWorkerOptions.workerSrc = './pdfjs/pdf.worker.mjs';
+
+    // URL to the PDF file
+    const url = 'https://raw.githubusercontent.com/bdeguio/black-webpage/main/epubs/23BRK.pdf';
+
+    // Canvas setup
+    const canvas = document.getElementById('pdf-render');
+    const ctx = canvas.getContext('2d');
+
+    // Load the PDF
+    pdfjsLib.getDocument(url).promise.then(pdfDoc => {
+      // Get the first page
+      pdfDoc.getPage(1).then(page => {
+        const viewport = page.getViewport({ scale: 1.5 }); // Adjust scale for zoom
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        // Render the page
+        const renderContext = {
+          canvasContext: ctx,
+          viewport: viewport,
+        };
+        page.render(renderContext);
+      });
+    }).catch(err => {
+      console.error('Error loading PDF:', err);
+      alert('Failed to load the PDF.');
+    });
+  </script>
 </body>
 </html>
