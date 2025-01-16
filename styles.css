@@ -47,7 +47,8 @@ a:hover {
 }
 
 .back-arrow:hover {
-  color: #0077cc;
+  background-color: #00aaff;
+  color: black;
 }
 
 /* Image viewer */
