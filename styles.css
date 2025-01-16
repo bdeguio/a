@@ -1,14 +1,15 @@
 /* General styling */
 body {
   margin: 0;
-  background: black;
+  padding: 0;
+  background-color: black;
   color: white;
   font-family: Arial, sans-serif;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
+  text-align: center;
 }
 
 /* Back arrow */
