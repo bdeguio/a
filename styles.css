@@ -1,22 +1,24 @@
-/* General Body Styling */
+/* General styling */
 body {
   margin: 0;
-  padding: 0;
-  background-color: black;
+  background: black;
   color: white;
   font-family: Arial, sans-serif;
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
-/* Header Styling */
+/* Back arrow */
 #header {
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 10px;
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
   z-index: 1000;
 }
 
@@ -24,23 +26,21 @@ body {
   color: #00aaff;
   text-decoration: none;
   font-size: 1.2rem;
-  font-weight: bold;
-  margin-left: 10px;
 }
 
 .back-arrow:hover {
   color: #0077cc;
 }
 
-/* PDF Container Styling */
-#pdf-container {
-  margin-top: 50px; /* Offset for fixed header */
-  height: calc(100vh - 50px);
-  width: 100%;
+/* Image viewer */
+#image-viewer {
+  margin-top: 50px;
+  text-align: center;
 }
 
-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+#image-viewer img {
+  max-width: 90%;
+  height: auto;
+  border: 2px solid white;
+  border-radius: 5px;
 }
