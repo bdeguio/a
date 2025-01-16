@@ -1,28 +1,46 @@
+/* General Body Styling */
 body {
   margin: 0;
   padding: 0;
   background-color: black;
   color: white;
   font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
-a {
+/* Header Styling */
+#header {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.back-arrow {
   color: #00aaff;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  border: 2px solid #00aaff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
+  margin-left: 10px;
 }
 
-a:hover {
-  background-color: #00aaff;
-  color: black;
+.back-arrow:hover {
+  color: #0077cc;
+}
+
+/* PDF Container Styling */
+#pdf-container {
+  margin-top: 50px; /* Offset for fixed header */
+  height: calc(100vh - 50px);
+  width: 100%;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
