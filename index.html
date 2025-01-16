@@ -3,33 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Embedded ePub Reader</title>
+  <title>Online eBook Reader</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/epub.js/0.3.88/epub.min.js"></script>
 </head>
 <body>
-  <h1>ePub Reader: 23BRK</h1>
-  <div id="controls">
+  <header>
+    <h1>My eBook Reader</h1>
+    <nav>
+      <button id="library">Library</button>
+      <button id="settings">Settings</button>
+    </nav>
+  </header>
+  <main>
+    <aside id="sidebar">
+      <h2>Table of Contents</h2>
+      <ul id="toc"></ul>
+    </aside>
+    <section id="reader-container">
+      <div id="reader"></div>
+    </section>
+  </main>
+  <footer>
     <button id="prev">Previous</button>
     <button id="next">Next</button>
-  </div>
-  <div id="reader"></div>
+  </footer>
   <script>
+    // Load ePub.js and initialize
     const book = ePub("epubs/23BRK.epub");
     const rendition = book.renderTo("reader", {
       width: "100%",
-      height: "100%"
+      height: "100%",
     });
 
+    // Display the first page
     rendition.display();
 
-    // Navigation controls
+    // Handle navigation
     document.getElementById("prev").addEventListener("click", () => rendition.prev());
     document.getElementById("next").addEventListener("click", () => rendition.next());
 
-    // Table of contents (optional)
-    book.getToc().then(toc => {
-      console.log("Table of Contents:", toc);
+    // Load Table of Contents
+    book.getToc().then((toc) => {
+      const tocElement = document.getElementById("toc");
+      toc.forEach((chapter) => {
+        const item = document.createElement("li");
+        item.textContent = chapter.label;
+        item.addEventListener("click", () => rendition.display(chapter.href));
+        tocElement.appendChild(item);
+      });
     });
   </script>
 </body>
