@@ -4,34 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PDF Reader</title>
-  <script type="module">
-    import pdfjsLib from './pdfs/pdf.mjs';
-
-    pdfjsLib.GlobalWorkerOptions.workerSrc = './pdfs/pdf.worker.mjs';
-
-    const url = 'https://bdeguio.github.io/black-webpage/epubs/23BRK.pdf';
-
-    const canvas = document.createElement('canvas');
-    document.body.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-
-    pdfjsLib.getDocument(url).promise.then(pdfDoc => {
-      pdfDoc.getPage(1).then(page => {
-        const viewport = page.getViewport({ scale: 1 });
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-
-        page.render({
-          canvasContext: ctx,
-          viewport: viewport,
-        });
-      });
-    }).catch(err => {
-      console.error('Error:', err);
-      document.body.innerHTML = `<p style="color: red;">Failed to load PDF: ${err.message}</p>`;
-    });
-  </script>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body style="margin: 0; background: black; color: white;">
+<body>
+  <div id="header">
+    <a href="index.html" class="back-arrow">← Back</a>
+  </div>
+  <div id="image-viewer">
+    <img src="images/page1.png" alt="23BRK - Page 1">
+  </div>
 </body>
 </html>
