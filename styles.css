@@ -67,3 +67,8 @@ a:hover {
   border: 2px solid white;
   border-radius: 5px;
 }
+
+/* PDF Embed styling */
+embed {
+  margin-top: 50px; /* Account for fixed header */
+}
